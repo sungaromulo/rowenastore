@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Online Shopping</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4e1ff;
+        }
+
+        .container {
+            display: flex;
+            width: 900px;
+            height: 500px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        /* Left Side - Image Section */
+        .image-section {
+            width: 50%;
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .image-section img {
+            width: 80%;
+        }
+
+        /* Right Side - Login Form */
+        .login-section {
+            width: 50%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-section h2 {
+            text-align: center;
+            color: #6d3681;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #8e44ad;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #732d91;
+        }
+
+        .form-toggle {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .form-toggle a {
+            color: #8e44ad;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-toggle a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                width: 90%;
+                height: auto;
+            }
+
+            .image-section {
+                width: 100%;
+                height: 200px;
+            }
+
+            .login-section {
+                width: 100%;
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Left Side - Image -->
+    <div class="image-section">
+        <img src="https://cdn-icons-png.flaticon.com/512/2331/2331970.png" alt="Shopping Image">
+    </div>
+
+    <!-- Right Side - Login Form -->
+    <div class="login-section">
+        <h2>User Login</h2>
+        <form id="loginForm" onsubmit="return loginValidation(event)">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" name="loginEmail" required placeholder="Enter your email">
+
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" name="loginPassword" required placeholder="Enter your password">
+
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="form-toggle">
+            <BR>
+            Don't have an account? <a href="register.html">Sign Up</a>
+        </div>
+
+        <div class="error-message" id="loginErrorMessage"></div>
+    </div>
+</div>
+
+<script>
+    // Function to validate login form
+    function loginValidation(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get input values
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+
+        // Email validation
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (!emailPattern.test(email)) {
+            document.getElementById('loginErrorMessage').innerText = "Please enter a valid email address.";
+            return false;
+        }
+
+        // Password check
+        if (!password) {
+            document.getElementById('loginErrorMessage').innerText = "Password is required.";
+            return false;
+        }
+
+        // Simulated login success
+        alert("Login successful!");
+        window.location.href = 'index.html'; // Redirect to home page
+        return true;
+    }
+</script>
+
+</body>
+</html>

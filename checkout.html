@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Registration & Login</title>
+    <style>
+        /* Basic Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding-top: 20px;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .form-toggle {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .form-toggle a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .form-toggle a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Product Section -->
+<section id="sellers">
+    <div class="seller container">
+        <h2>Top Sales</h2>
+        <div class="best-seller">
+            <!-- Example Product -->
+            <div class="best-p1" id="product1">
+                <img src="https://i.postimg.cc/8CmBZH5N/shoes.webp" alt="PS England Shoes">
+                <div class="best-p1-txt">
+                    <div class="name-of-p">
+                        <p>PS England Shoes</p>
+                    </div>
+                    <div class="rating">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bx-star'></i>
+                        <i class='bx bx-star'></i>
+                    </div>
+                    <div class="price">
+                        &dollar;37.24
+                    </div>
+                    <div class="buy-now">
+                        <button onclick="addToCart('PS England Shoes', 37.24)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Additional products can follow this same structure -->
+        </div>
+    </div>
+</section>
+
+<!-- Cart Section -->
+<section id="cartSection">
+    <div class="container">
+        <h2>Your Cart</h2>
+        <div id="cartItems">
+            <!-- Cart items will appear here -->
+        </div>
+        <button onclick="checkout()">Proceed to Checkout</button>
+    </div>
+</section>
+
+<script>
+// Initialize an empty cart
+let cart = [];
+
+// Function to add items to the cart
+function addToCart(productName, productPrice) {
+    // Check if product already exists in the cart
+    const productIndex = cart.findIndex(item => item.name === productName);
+
+    if (productIndex !== -1) {
+        cart[productIndex].quantity += 1; // Increase quantity if product is already in cart
+    } else {
+        cart.push({ name: productName, price: productPrice, quantity: 1 });
+    }
+
+    // Update the cart display
+    displayCart();
+}
+
+// Function to display cart items
+function displayCart() {
+    const cartItemsContainer = document.getElementById('cartItems');
+    cartItemsContainer.innerHTML = ''; // Clear previous cart display
+
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+        return;
+    }
+
+    let total = 0;
+    cart.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.innerHTML = `
+            <p>${item.name} - $${item.price} x ${item.quantity}</p>
+        `;
+        cartItemsContainer.appendChild(itemDiv);
+        total += item.price * item.quantity;
+    });
+
+    // Display total amount
+    const totalDiv = document.createElement('div');
+    totalDiv.innerHTML = `<p>Total: $${total.toFixed(2)}</p>`;
+    cartItemsContainer.appendChild(totalDiv);
+}
+
+// Function for checkout
+function checkout() {
+    if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+
+    // Display a simple checkout confirmation
+    const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    alert(`Thank you for your purchase! Total amount: $${totalAmount.toFixed(2)}`);
+
+    // Clear the cart after checkout
+    cart = [];
+    displayCart(); // Refresh cart view
+}
+</script>
+
+</body>
+</html>

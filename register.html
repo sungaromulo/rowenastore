@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Account</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f4e1ff;
+        }
+
+        .container {
+            width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .container h2 {
+            color: #8e44ad;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-top: 5px;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #8e44ad;
+            outline: none;
+            box-shadow: 0 0 5px rgba(142, 68, 173, 0.5);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #8e44ad;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #732d91;
+        }
+
+        .form-toggle {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .form-toggle a {
+            color: #8e44ad;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-toggle a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Create an Account</h2>
+    <form id="registrationForm" onsubmit="return registerValidation(event)">
+        <div class="input-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+        </div>
+        <div class="input-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email">
+        </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="Enter your password">
+        </div>
+        <div class="input-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+        </div>
+        <button type="submit" class="btn">Register</button>
+    </form>
+    <div class="form-toggle">
+        Already have an account? <a href="login.html">Sign In</a>
+    </div>
+    <div class="error-message" id="registerErrorMessage"></div>
+</div>
+
+<script>
+    function registerValidation(event) {
+        event.preventDefault();
+
+        const fullName = document.getElementById('fullName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const errorMessage = document.getElementById('registerErrorMessage');
+
+        if (password !== confirmPassword) {
+            errorMessage.innerText = "Passwords do not match!";
+            return false;
+        }
+
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (!emailPattern.test(email)) {
+            errorMessage.innerText = "Please enter a valid email address.";
+            return false;
+        }
+
+        alert("Registration successful! You can now sign in.");
+        window.location.href = 'register.html';
+        return true;
+    }
+</script>
+
+</body>
+</html>
